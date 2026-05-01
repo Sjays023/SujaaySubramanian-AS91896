@@ -18,12 +18,13 @@ tk.Entry(root).grid(row=2, column=1)
 button = tk.Button(root, text="Exit", width=25, command=root.destroy)
 button.grid(row=3, column=0, columnspan=2, pady=10)
 
+var1 = tk.IntVar()
+var2 = tk.IntVar()
+
+tk.Checkbutton(root, text="Male", variable=var1).grid(row=0, sticky="w")
+tk.Checkbutton(root, text="Female", variable=var2).grid(row=1, sticky=tk.W)
 
 
-root.geometry("400x400")
-bg = PhotoImage(file = "image.png")
-label1 = Label(root, image = bg)
-label1.place(x = 0, y = 0)
-tk.PhotoImage =
+
 
 root.mainloop()
