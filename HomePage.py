@@ -3,9 +3,9 @@ from tkinter import *
 
 root = tk.Tk()
 root.title("7 Wonders Of The World Quiz")
-root.geometry("1204x680")
+root.geometry("1207x675")
 
-bg = PhotoImage(file="Photos/starting-page.png")
+bg = PhotoImage(file="Photos/starting_page.png")
 canvas1 = Canvas(root, width=1204, height=680)
 canvas1.pack(fill="both", expand=True)
 canvas1.create_image(0, 0, image=bg, anchor="nw")
@@ -34,8 +34,8 @@ canvas1.create_window(1050, 635, window=button)
 button.config(background= "#fce6b4", height=1, width=5, font=("Verdana", 24, "bold"))
 
 
-Start_button = tk.Button(root, text="Start Quiz", width=25, command=root.destroy)
-canvas1.create_window(1000, 400, window=Start_button)
+Start_button = tk.Button(root, text="Start Quiz", width=20, command=root.destroy)
+canvas1.create_window(602, 600, window=Start_button)
 button.config(background= "#fce6b4", height=1, width=5, font=("Verdana", 24, "bold"))
 
 
