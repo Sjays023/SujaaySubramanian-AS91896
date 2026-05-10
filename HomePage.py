@@ -1,23 +1,35 @@
 import tkinter as tk
 from tkinter import *
 
-from test import canvas1
 
 
 def start_quiz():
+
     canvas1.delete("all")
 
-question1_lbl = tk.Label(root, text="Question 1: Where is the Taj Mahal?", fg="black", bg="#fcf4ea", font=("Verdana", 18, "bold") )
-canvas1.create_window(600, 100, window=homepage.btn)
+    new_bg = PhotoImage(file="Photos/question1_page.png")  # Fixed potential typo
+    canvas1.create_image(0, 0, image=new_bg, anchor="nw")
+    canvas1.new_bg = new_bg
 
 
 
+    back_btn = tk.Button(root, text="", command=setup_main_menu)
+    canvas1.create_window(50, 50, window=back_btn, )
 
 
 
+def setup_main_menu():
+
+    canvas1.delete("all")
+    canvas1.create_image(0, 0, image=bg, anchor=NW)
 
 
-
+    canvas1.create_window(67, 100, window=lbl1)
+    canvas1.create_window(200, 100, window=ent1)
+    canvas1.create_window(67, 130, window=lbl2)
+    canvas1.create_window(200, 130, window=ent2)
+    canvas1.create_window(825, 610, window=exit_button)
+    canvas1.create_window(365, 610, window=start_button)
 
 
 root = tk.Tk()
@@ -51,15 +63,14 @@ canvas1.create_window(200, 130, window=ent2)
 
 
 #Buttons
+exit_button = tk.Button(root, text="Exit", width=25, command=root.destroy, relief="flat", overrelief="raised", background="#fcbe97", )
+canvas1.create_window(825, 610, window=exit_button)
+exit_button.config(height=1, width=5, font=("Verdana", 24, "bold"))
 
-button = tk.Button(root, text="Exit", width=25, command=root.destroy, relief="flat", overrelief="raised", background="#fcbe97")
-canvas1.create_window(825, 610, window=button)
-button.config(height=1, width=5, font=("Verdana", 24, "bold"))
 
-
-Start_button = tk.Button(root, text="Start Quiz", relief="flat", overrelief="raised", background="#fcbe97", command=lambda: show_frame(page1) )
-canvas1.create_window(365, 610, window=Start_button)
-Start_button.config(font=("Verdana", 24, "bold") )
+start_button = tk.Button(root, text="Start Quiz", relief="flat", overrelief="raised", background="#fcbe97", command=start_quiz )
+canvas1.create_window(365, 610, window=start_button)
+start_button.config(font=("Verdana", 24, "bold") )
 
 var1 = tk.IntVar()
 var2 = tk.IntVar()
