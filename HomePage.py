@@ -46,7 +46,7 @@ canvas2.create_image(0, 0, anchor="nw", image=q1bg_Image)
 
 
 lbl_q1 = tk.Label(q1_frame, text="Question 1: What is the tallest wonder?")
-lbl_q1.pack(pady=50)
+lbl_q1.pack(pady=50, bg = "Photos/question1_page.png")
 
 back_button = tk.Button(q1_frame, text="Back?", relief="flat", overrelief="raised", background="#fcbe97", command=lambda: show_frame(home_frame))
 back_button.config(font=("Verdana", 15,) )
