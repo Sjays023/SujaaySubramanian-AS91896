@@ -1,3 +1,5 @@
+#delete all and start from scratch
+
 import tkinter as tk
 from tkinter import PhotoImage, Canvas
 
