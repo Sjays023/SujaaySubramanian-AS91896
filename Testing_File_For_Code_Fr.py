@@ -13,16 +13,10 @@ score = 0
 questionnumber = 0
 
 
-BG_COLOR = "#F5DEB3"  # Wheat background
+BG_COLOR = "#F5DEB3"
 
-
-# -------------------------
-# ALL Questions (5)
-# Format:
-# id: [question, option1, option2, option3, option4, correct_text, correct_option_number]
-# -------------------------
 questions_answers = {
-   1: ["At night, what must a towed vehicle have at the back of it?",
+   1: ["What Wonder Is This?",
        "A white flag", "Reflective tape", "A white light", "A red light",
        "A red light", 4],
 
@@ -35,7 +29,7 @@ questions_answers = {
        "Stay stopped until the lights stop flashing", 2],
 
 
-   3: ["What is the maximum legal speed for a car towing a trailer on the open road?",
+   3: ["What Wonder Is This?",
        "70km/h", "80km/h", "90km/h", "100km/h",
        "90km/h", 3],
 
