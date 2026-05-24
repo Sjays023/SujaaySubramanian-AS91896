@@ -192,6 +192,7 @@ class Quiz:
 
 
        Radiobutton(container,
+
                    text=questions_answers[questionnumber][3],
                    variable=self.var, value=3,
                    font=("Helvetica", 14),

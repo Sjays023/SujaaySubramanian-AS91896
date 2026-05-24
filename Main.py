@@ -101,9 +101,21 @@ class Startingpage:
 
         Label(self.frame,
               text="7 Wonders of The World Quiz",
-              font=("sans-seriff", 14),
+              font=("Arial", 14),
               bg=bg_color).pack(pady=10)
 
+        Label(self.frame,
+              text="Enter your name:",
+              font=("Arial", 14),
+              bg=bg_color).pack(pady=10)
+
+        self.entry = Entry(self.frame, font=("Arial", 14))
+        self.entry.pack(pady=10)
+
+        Button(self.frame,
+               text="Start Quiz",
+               font=("Arial", 14),
+               bg="orange")
 
 
 
