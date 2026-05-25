@@ -94,3 +94,5 @@ if __name__ == "__main__":
 
     app = Startingpage(root)
     root.mainloop()
+
+#repush cause wrong messege
