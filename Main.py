@@ -57,9 +57,8 @@ class Startingpage:
         self.bg_label = Label(self.frame, image=bg_image)
         self.bg_label.place(x=0, y=0, relwidth=1, relheight=1)
 
-
-        Label(self.frame, text="7 Wonders of The World Quiz", font=("Arial", 14), bg=bg_color).pack(pady=10)
-        Label(self.frame, text="Enter your name:", font=("Arial", 14), bg=bg_color).pack(pady=10)
+        self.name_label = Label(self.frame, text="Enter your name:", font=("Arial", 14), bg=bg_color)
+        self.name_label.place(x=100, y=100)
 
         self.entry = Entry(self.frame, font=("Arial", 14))
         self.entry.pack(pady=10)
@@ -95,4 +94,3 @@ if __name__ == "__main__":
     app = Startingpage(root)
     root.mainloop()
 
-#repush cause wrong messege
