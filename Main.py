@@ -58,14 +58,14 @@ class Startingpage:
         self.bg_label.place(x=0, y=0, relwidth=1, relheight=1)
 
         self.name_label = Label(self.frame, text="Enter your name:", font=("Arial", 14), bg=bg_color)
-        self.name_label.place(x=100, y=100)
+        self.name_label.place(x=100, y=50)
 
         self.entry = Entry(self.frame, font=("Arial", 14))
         self.entry.pack(pady=10)
+        self.entry.place(x=67, y=75)
 
         Button(self.frame, text="Start Quiz", font=("Arial", 14), bg="orange", command=self.start_quiz).pack(pady=10)
-        Button(self.frame, text="Exit", font=("Helvetica", 14), bg="red", fg="white", command=self.parent.destroy).pack(
-            pady=10)
+        Button(self.frame, text="Exit", font=("Helvetica", 14), bg="red", fg="white", command=self.parent.destroy).pack(pady=10)
 
     def start_quiz(self):
         username = self.entry.get().strip()
