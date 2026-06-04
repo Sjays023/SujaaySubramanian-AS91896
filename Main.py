@@ -44,7 +44,14 @@ class Quiz:
         self.parent = parent
         self.frame = Frame(parent, bg=bg_color)
         self.frame.pack(fill="both", expand=True)
-        Label(self.frame, text="Quiz Screen (Add your questions here!)", font=("Arial", 14), bg=bg_color).pack(pady=50)
+        Label(self.frame, text="Question One", font=("Arial", 14), bg=bg_color).pack(pady=50)
+        Label(self.frame, text="What Wonder Is This?")
+
+
+
+
+
+
 
 
 class Startingpage:
@@ -64,8 +71,12 @@ class Startingpage:
         self.entry.pack(pady=10)
         self.entry.place(x=67, y=75)
 
-        Button(self.frame, text="Start Quiz", font=("Arial", 14), bg="orange", command=self.start_quiz).pack(pady=10)
-        Button(self.frame, text="Exit", font=("Helvetica", 14), bg="red", fg="white", command=self.parent.destroy).pack(pady=10)
+        Button(self.frame, text="Start Quiz", font=("Arial", 25), bg="#f9af8f", command=self.start_quiz).place(x=277, y=580)
+
+
+        Button(self.frame, text="Exit", font=("Helvetica", 28), bg="#f9af8f", fg="black", command=self.parent.destroy).place(x=790, y=575)
+
+
 
     def start_quiz(self):
         username = self.entry.get().strip()
