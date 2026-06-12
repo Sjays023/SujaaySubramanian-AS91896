@@ -42,10 +42,14 @@ def randomiser():
 class Quiz:
     def __init__(self, parent):
         self.parent = parent
-        self.frame = Frame(parent, bg=bg_color)
+        self.frame = Frame(parent)
         self.frame.pack(fill="both", expand=True)
+        self.bg_label = Label(self.frame, image=q1_image)
+        self.bg_label.place(x=0, y=0, relwidth=1, relheight=1)
         Label(self.frame, text="Question One", font=("Arial", 14), bg=bg_color).pack(pady=50)
-        Label(self.frame, text="What Wonder Is This?")
+        Label(self.frame, text="What Wonder Is This?", font=("Arial", 14), bg=bg_color)
+
+
 
 
 
@@ -93,6 +97,9 @@ if __name__ == "__main__":
     root.title("7 Wonders Of The World Quiz")
     root.geometry("1207x675")
     root.configure(bg=bg_color)
+
+
+    q1_image = PhotoImage(file="Photos/q1page.png")
 
 
     try:
