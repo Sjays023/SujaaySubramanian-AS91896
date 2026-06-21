@@ -1,6 +1,8 @@
 import random
 import tkinter as tk
-from tkinter import messagebox, Frame, Label, Entry, Button, PhotoImage
+from tkinter import messagebox, Frame, Label, Entry, Button, PhotoImage, Radiobutton
+
+import self
 
 # Variables
 name = []
@@ -9,28 +11,111 @@ score = 0
 question_number = 0
 bg_color = "#fcf0ea"
 
+
 questions_with_answers = {
-    0: ["What Wonder is this?", "The Great Wall Of China", "Petra", "Machu Picchu", "Christ The Redeemer", 4],
-    1: ["What Wonder is this?", "Taj Mahal", "Petra", "Colosseum", "Christ The Redeemer", 2],
-    2: ["What Wonder is this?", "The Great Wall Of China", "Chichén Itzá", "Machu Picchu", "Christ The Redeemer", 3],
-    3: ["What Wonder is this?", "The Great Wall Of China", "Petra", "Chichén Itzá", "Colosseum", 4],
-    4: ["What Wonder is this?", "Taj Mahal", "Petra", "Machu Picchu", "Chichén Itzá", 1],
-    5: ["What Wonder is this?", "The Great Wall Of China", "Petra", "Chichén Itzá", "Christ The Redeemer", 1],
-    6: ["What Wonder is this?", "The Great Wall Of China", "Petra", "Machu Picchu", "Chichén Itzá", 4],
-    7: ["What country is this Wonder in?", "China", "Jordan", "Mexico", "Brazil", 3],
-    8: ["What country is this Wonder in?", "China", "India", "Mexico", "Brazil", 1],
-    9: ["What country is this Wonder in?", "Italy", "Peru", "Italy", "Brazil", 4],
-    10: ["What country is this Wonder in?", "China", "Jordan", "Peru", "Brazil", 2],
-    11: ["What country is this Wonder in?", "China", "Jordan", "Peru", "India", 3],
-    12: ["What country is this Wonder in?", "Italy", "Jordan", "Mexico", "Brazil", 1],
-    13: ["What country is this Wonder in?", "China", "Jordan", "India", "Brazil", 3],
+    0: {
+"question": "What Wonder is this?",
+"choices": ["The Great Wall Of China", "Petra", "Machu Picchu", "Christ The Redeemer",],
+"answer": "Christ The Redeemer" },
+
+
+    1: {
+"question": "What Wonder is this?",
+"choices": ["Taj Mahal", "Petra", "Colosseum", "Christ The Redeemer",],
+"answer": "Petra" },
+
+
+    2: {
+"question": "What Wonder is this?",
+"choices": ["The Great Wall Of China", "Chichén Itzá", "Machu Picchu", "Christ The Redeemer",],
+"answer": "Machu Picchu" },
+
+
+    3: {
+"question": "What Wonder is this?",
+"choices": ["The Great Wall Of China", "Petra", "Chichén Itzá", "Colosseum",],
+"answer": "Colosseum" },
+
+
+    4: {
+"question": "What Wonder is this?",
+"choices": ["Taj Mahal", "Petra", "Machu Picchu", "Chichén Itzá",],
+"answer": "Taj Mahal" },
+
+    5: {
+"question": "What Wonder is this?",
+"choices": ["The Great Wall Of China", "Petra", "Chichén Itzá", "Christ The Redeemer",],
+"answer": "The Great Wall Of China" },
+
+
+
+    6: {
+"question": "What Wonder is this?",
+"choices": ["The Great Wall Of China", "Petra", "Machu Picchu", "Chichén Itzá",],
+"answer": "Chichén Itzá" },
+
+
+    7: {
+"question": "Which Country is this Wonder in?",
+"choices": ["China", "Jordan", "Mexico", "Brazil",],
+"answer": "Mexico" },
+
+
+
+    8: {
+"question": "Which Country is this Wonder in?",
+"choices": ["China", "India", "Mexico", "Brazil",],
+"answer": "China" },
+
+
+
+    9: {
+"question": "Which Country is this Wonder in?",
+"choices": [ "Italy", "Peru", "Italy", "Brazil",],
+"answer": "Brazil" },
+
+
+
+
+    10: {
+"question": "Which Country is this Wonder in?",
+"choices": ["China", "Jordan", "Peru", "Brazil",],
+"answer": "Jordan" },
+
+
+
+
+    11: {
+"question": "Which Country is this Wonder in?",
+"choices": ["China", "Jordan", "Peru", "India",],
+"answer": "Peru" },
+
+
+
+
+    12: {
+"question": "Which Country is this Wonder in?",
+"choices": ["Italy", "Jordan", "Mexico", "Brazil",],
+"answer": "Italy" },
+
+
+
+
+    13: {
+"question": "Which Country is this Wonder in?",
+"choices": ["China", "Italy", "India", "Brazil",],
+"answer": "India" },
+
 }
+
+
+
 
 
 def randomiser():
     global question_number
     if len(questions_asked) >= len(questions_with_answers):
-        print("All questions have been answered!")
+        print("All questions have been answered")
         return None
     question_number = random.randint(0, len(questions_with_answers) - 1)
     if question_number not in questions_asked:
@@ -44,10 +129,41 @@ class Quiz:
         self.parent = parent
         self.frame = Frame(parent)
         self.frame.pack(fill="both", expand=True)
-        self.bg_label = Label(self.frame, image=q1_image)
+        self.bg_label = Label(self.frame, bg=bg_color)
         self.bg_label.place(x=0, y=0, relwidth=1, relheight=1)
-        Label(self.frame, text="Question One", font=("Arial", 14), bg=bg_color).pack(pady=50)
-        Label(self.frame, text="What Wonder Is This?", font=("Arial", 14), bg=bg_color)
+
+        self.current_index = 0
+
+        self.question_label = tk.Label(
+            root,
+            textvariable=self.question_text,
+            font=("Helvitica", 14),
+            wraplength=350,
+            justify="center"
+        )
+        self.question_label.pack(pady=20)
+
+        self.next_button = tk.Button(root, text="Next Question", command=self.load_question)
+        self.next_button.pack(pady=20)
+
+        self.load_question()
+
+    def load_question(self):
+        if self.current_index < len(questions_with_answers):
+           current_q = questions_with_answers[self.current_index]["question"]
+
+        self.question_text.set(current_q)
+
+        self.current_index += 1
+
+
+        self.question_text.set("Quiz Completed!")
+        self.next_button.config(state="disabled")
+
+
+
+
+
 
 
 
@@ -109,6 +225,7 @@ if __name__ == "__main__":
         bg_image = PhotoImage()
         print("Warning: Photos/starting_page.png not found.")
 
+    v = tk.IntVar()
     app = Startingpage(root)
     root.mainloop()
 
