@@ -12,7 +12,7 @@ question_number = 0
 bg_color = "#fcf0ea"
 
 
-questions_with_answers = {
+question_dictionary = {
     0: {
 "question": "What Wonder is this?",
 "choices": ["The Great Wall Of China", "Petra", "Machu Picchu", "Christ The Redeemer",],
@@ -110,22 +110,9 @@ questions_with_answers = {
 
 
 
-
-
-def randomiser():
-    global question_number
-    if len(questions_asked) >= len(questions_with_answers):
-        print("All questions have been answered")
-        return None
-    question_number = random.randint(0, len(questions_with_answers) - 1)
-    if question_number not in questions_asked:
-        questions_asked.append(question_number)
-    else:
-        randomiser()
-
-
 class Quiz:
     def __init__(self, parent):
+        self.question_text = tk.StringVar()
         self.parent = parent
         self.frame = Frame(parent)
         self.frame.pack(fill="both", expand=True)
@@ -135,41 +122,35 @@ class Quiz:
         self.current_index = 0
 
         self.question_label = tk.Label(
-            root,
+            self.frame,
             textvariable=self.question_text,
-            font=("Helvitica", 14),
+            font=("Helvetica", 14),
+            bg=bg_color,
             wraplength=350,
             justify="center"
         )
         self.question_label.pack(pady=20)
 
-        self.next_button = tk.Button(root, text="Next Question", command=self.load_question)
+        self.next_button = tk.Button(self.frame, text="Next Question", command=self.load_question)
         self.next_button.pack(pady=20)
 
         self.load_question()
 
+
     def load_question(self):
-        if self.current_index < len(questions_with_answers):
-           current_q = questions_with_answers[self.current_index]["question"]
 
-        self.question_text.set(current_q)
+        if self.current_index < len(question_dictionary):
+            current_q = question_dictionary[self.current_index]["question"]
+            self.question_text.set(current_q)
+            self.current_index += 1
+        else:
+            self.question_text.set("Quiz Completed!")
+            self.next_button.config(state="disabled")
 
-        self.current_index += 1
 
 
         self.question_text.set("Quiz Completed!")
         self.next_button.config(state="disabled")
-
-
-
-
-
-
-
-
-
-
-
 
 
 
