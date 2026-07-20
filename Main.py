@@ -211,7 +211,7 @@ if __name__ == "__main__":
     root.configure(bg=bg_color)
 
 
-    q1_image = PhotoImage(file="Photos/q1page.png")
+
 
 
     try:
