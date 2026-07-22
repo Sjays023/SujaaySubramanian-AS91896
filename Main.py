@@ -1,6 +1,7 @@
 import random
 import tkinter as tk
 from tkinter import messagebox, Frame, Label, Entry, Button, PhotoImage, Radiobutton
+from PIL import Image, ImageTk
 
 import self
 
@@ -16,63 +17,73 @@ question_dictionary = {
     0: {
 "question": "What Wonder is this?",
 "choices": ["The Great Wall Of China", "Petra", "Machu Picchu", "Christ The Redeemer",],
-"answer": "Christ The Redeemer" },
+"answer": "Christ The Redeemer",
+"image": "CTR.jpg"},
 
 
     1: {
 "question": "What Wonder is this?",
 "choices": ["Taj Mahal", "Petra", "Colosseum", "Christ The Redeemer",],
-"answer": "Petra" },
+"answer": "Petra",
+"image" : "P.jpeg"},
 
 
     2: {
 "question": "What Wonder is this?",
 "choices": ["The Great Wall Of China", "Chichén Itzá", "Machu Picchu", "Christ The Redeemer",],
-"answer": "Machu Picchu" },
+"answer": "Machu Picchu",
+"image" : "MP.jpg" },
 
 
     3: {
 "question": "What Wonder is this?",
 "choices": ["The Great Wall Of China", "Petra", "Chichén Itzá", "Colosseum",],
-"answer": "Colosseum" },
+"answer": "Colosseum",
+"image" : "C.jpg" },
 
 
     4: {
 "question": "What Wonder is this?",
 "choices": ["Taj Mahal", "Petra", "Machu Picchu", "Chichén Itzá",],
-"answer": "Taj Mahal" },
+"answer": "Taj Mahal",
+"image" : "TM.jpeg" },
 
     5: {
 "question": "What Wonder is this?",
 "choices": ["The Great Wall Of China", "Petra", "Chichén Itzá", "Christ The Redeemer",],
-"answer": "The Great Wall Of China" },
+"answer": "The Great Wall Of China",
+"image" : "TGWOC.jpg" },
 
 
 
     6: {
 "question": "What Wonder is this?",
 "choices": ["The Great Wall Of China", "Petra", "Machu Picchu", "Chichén Itzá",],
-"answer": "Chichén Itzá" },
+"answer": "Chichén Itzá",
+"image" : "CI.jpg" },
 
 
     7: {
 "question": "Which Country is this Wonder in?",
 "choices": ["China", "Jordan", "Mexico", "Brazil",],
-"answer": "Mexico" },
+"answer": "Mexico",
+"image" : "CI.jpg" },
 
 
 
     8: {
 "question": "Which Country is this Wonder in?",
 "choices": ["China", "India", "Mexico", "Brazil",],
-"answer": "China" },
+"answer": "China",
+"image" : "TGWOC.jpg" },
 
 
 
     9: {
 "question": "Which Country is this Wonder in?",
 "choices": [ "Italy", "Peru", "Greece", "Brazil",],
-"answer": "Brazil" },
+"answer": "Brazil",
+"image" : "CTR.jpg" },
 
 
 
@@ -80,7 +91,8 @@ question_dictionary = {
     10: {
 "question": "Which Country is this Wonder in?",
 "choices": ["China", "Jordan", "Peru", "Brazil",],
-"answer": "Jordan" },
+"answer": "Jordan",
+"image" : "P.jpeg" },
 
 
 
@@ -88,7 +100,8 @@ question_dictionary = {
     11: {
 "question": "Which Country is this Wonder in?",
 "choices": ["China", "Jordan", "Peru", "India",],
-"answer": "Peru" },
+"answer": "Peru",
+"image" : "MP.jpg" },
 
 
 
@@ -96,7 +109,8 @@ question_dictionary = {
     12: {
 "question": "Which Country is this Wonder in?",
 "choices": ["Italy", "Jordan", "Mexico", "Brazil",],
-"answer": "Italy" },
+"answer": "Italy",
+"image" : "C.jpg" },
 
 
 
@@ -104,7 +118,8 @@ question_dictionary = {
     13: {
 "question": "Which Country is this Wonder in?",
 "choices": ["China", "Italy", "India", "Brazil",],
-"answer": "India" },
+"answer": "India",
+"image" : "TM.jpeg" },
 
 }
 
@@ -141,6 +156,10 @@ class Quiz:
         self.next_button = tk.Button(self.frame, text="Next Question", command=self.load_question)
         self.next_button.pack(pady=20)
 
+        self.image_label = Label(self.frame, bg=bg_color)
+        self.image_label.pack(pady=10)
+        self.image_label.place(x=12, y=123)
+
         self.load_question()
 
     def load_question(self):
@@ -150,22 +169,21 @@ class Quiz:
             self.choice_buttons = []
             self.selected_choice.set(None)
 
+            # Load and set question text
             current_q = question_dictionary[self.current_index]["question"]
             self.question_text.set(current_q)
-            choices = question_dictionary[self.current_index]["choices"]
 
-            for choice in choices:
-                rb = Radiobutton(self.choices_frame, text=choice, variable=self.selected_choice,
-                                 value=choice, font=("Arial", 12), bg=bg_color)
-                rb.pack(anchor="w", pady=5)
-                self.choice_buttons.append(rb)
-
-            self.current_index += 1
-        else:
-            self.question_label.pack_forget()
-            self.choices_frame.pack_forget()
-            self.question_text.set("Quiz Completed!")
-            self.next_button.config(state="disabled")
+            # --- NEW: Load and update image ---
+            image_path = "Photos/" + question_dictionary[self.current_index]["image"]
+            try:
+                # Open with Pillow for JPEG/PNG support and resize if needed
+                img = Image.open(image_path)
+                img = img.resize((300, 200), Image.Resampling.LANCZOS)
+                self.img_tk = ImageTk.PhotoImage(img)  # Save reference to prevent garbage collection
+                self.image_label.config(image=self.img_tk)
+            except Exception as e:
+                print(f"Could not load image {image_path}: {e}")
+                self.image_label.config(image=tk.PhotoImage())
 
 
 
