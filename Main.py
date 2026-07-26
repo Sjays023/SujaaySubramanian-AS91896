@@ -1,6 +1,6 @@
 import random
 import tkinter as tk
-from tkinter import messagebox, Frame, Label, Entry, Button, Radiobutton
+from tkinter import messagebox, Frame, Label, Entry, Button, Radiobutton, PhotoImage
 from PIL import Image, ImageTk
 
 # App styling constants
@@ -136,8 +136,9 @@ class Quiz:
         )
         self.question_label.pack(pady=20)
 
-        self.choices_frame = Frame(self.frame, bg=bg_color)
+        self.choices_frame = Frame(self.frame, bg=bg_color, width=400, height=200)
         self.choices_frame.pack(pady=10)
+
 
         self.image_label = Label(self.frame, bg=bg_color)
         self.image_label.pack(pady=10)
@@ -157,12 +158,22 @@ class Quiz:
             current_q = question_dictionary[self.current_index]
             self.question_text.set(current_q["question"])
 
-            for choice in current_q["choices"]:
+            specific_positions = [
+                (50, 20),
+                (50, 70),
+                (50, 120),
+                (50, 170)
+            ]
+
+            for i, choice in enumerate(current_q["choices"]):
                 rb = tk.Radiobutton(
                     self.choices_frame, text=choice, variable=self.selected_choice,
-                    value=choice, font=("Helvetica", 12), bg=bg_color, anchor="w"
+                    value=choice, font=("Helvetica", 12), bg=bg_color, anchor="w", padx=10, pady=10, indicatoron=1, selectcolor="green"
+
+
                 )
-                rb.pack(fill="x", pady=5)
+                x_pos, y_pos = specific_positions[i]
+                rb.place(x=x_pos, y=y_pos)
                 self.choice_buttons.append(rb)
 
             image_path = "Photos/" + current_q["image"]
@@ -188,8 +199,6 @@ class Quiz:
         correct_answer = question_dictionary[self.current_index]["answer"]
         if self.selected_choice.get() == correct_answer:
             self.score += 1
-
-        # FIXED: This now runs regardless of whether the answer was right or wrong
         self.current_index += 1
         self.load_question()
 
