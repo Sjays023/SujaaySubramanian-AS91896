@@ -143,8 +143,8 @@ class Quiz:
         self.image_label = Label(self.frame, bg=bg_color)
         self.image_label.pack(pady=10)
 
-        self.next_button = tk.Button(self.frame, text="Submit Answer", command=self.check_and_next)
-        self.next_button.pack(pady=20)
+        self.next_button = tk.Button(self.frame, text="Submit Answer",  font=("Helvetica", 28), bg="#417a58", fg="black", command=self.check_and_next)
+        self.next_button.pack(pady=50, padx=50)
 
         self.load_question()
 
@@ -168,8 +168,7 @@ class Quiz:
             for i, choice in enumerate(current_q["choices"]):
                 rb = tk.Radiobutton(
                     self.choices_frame, text=choice, variable=self.selected_choice,
-                    value=choice, font=("Helvetica", 12), bg=bg_color, anchor="w", padx=10, pady=10, indicatoron=1, selectcolor="green"
-
+                    value=choice, font=("Helvetica", 12), bg=bg_color, anchor="w", padx=10, pady=10 , fg="black"
 
                 )
                 x_pos, y_pos = specific_positions[i]
@@ -179,7 +178,7 @@ class Quiz:
             image_path = "Photos/" + current_q["image"]
             try:
                 opened_img = Image.open(image_path)
-                resized_img = opened_img.resize((300, 200))
+                resized_img = opened_img.resize((400, 200))
                 tk_img = ImageTk.PhotoImage(resized_img)
                 self.image_label.config(image=tk_img)
                 self.image_label.image = tk_img
@@ -227,7 +226,7 @@ class Startingpage:
         username = self.entry.get().strip()
         if username:
             self.frame.destroy()
-            Quiz(self.parent, username)  # FIXED: Pass the username string here directly
+            Quiz(self.parent, username)
         else:
             messagebox.showerror("Error", "Please enter your name.")
 
