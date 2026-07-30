@@ -225,6 +225,18 @@ class ResultsPage:
               bg=bg_color,
               fg="#333333").pack(pady=(40))
 
+        total_questions = len(question_dictionary)
+        pass_threshold = total_questions / 2
+
+        if score >=pass_threshold:
+            feedback_text = "Fantastic Job! You really know your world wonders!"
+            feedback_color = "green"
+        else:
+            feedback_text = "Unlucky,try and practice learning more about the 7 Wonders before you try again!"
+            feedback_color = "red"
+
+        Label(self.frame, text=feedback_text, font=("Helvetica", 14, "italic"), bg=bg_color, fg=feedback_color).pack(pady=(0, 30))
+
         Button(
             self.frame,
         text="Exit",
@@ -232,7 +244,6 @@ class ResultsPage:
             bg='#417a58',
             fg="white",
             command=parent.destroy).pack(pady=20)
-
 
 
 class Startingpage:
