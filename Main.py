@@ -3,9 +3,11 @@ import tkinter as tk
 from tkinter import messagebox, Frame, Label, Entry, Button, Radiobutton, PhotoImage
 from PIL import Image, ImageTk
 
-# App styling constants
-bg_color = "#fcf0ea"
+from Testing_File_For_Code_Fr import ResultsPage
 
+# Colour theme for the quiz
+bg_color = "#fcf0ea"
+#Question dictionary holds all the questions, answers and images that correlate with each-other
 question_dictionary = {
     0: {
         "question": "What Wonder is this?",
@@ -57,7 +59,7 @@ question_dictionary = {
 
 
     7: {
-        "question": "Which Country is this Wonder in?",
+        "question": "Which Country is Chichén Itzá in?",
         "choices": ["China", "Jordan", "Mexico", "Brazil" ,],
         "answer": "Mexico",
         "image" : "CI.jpg" },
@@ -65,7 +67,7 @@ question_dictionary = {
 
 
     8: {
-        "question": "Which Country is this Wonder in?",
+        "question": "Which Country is The Great Wall Of China in?",
         "choices": ["China", "India", "Mexico", "Brazil" ,],
         "answer": "China",
         "image" : "TGWOC.jpg" },
@@ -73,7 +75,7 @@ question_dictionary = {
 
 
     9: {
-        "question": "Which Country is this Wonder in?",
+        "question": "Which Country is Christ The Redeemer in?",
         "choices": [ "Italy", "Peru", "Greece", "Brazil" ,],
         "answer": "Brazil",
         "image" : "CTR.jpg" },
@@ -82,7 +84,7 @@ question_dictionary = {
 
 
     10: {
-        "question": "Which Country is this Wonder in?",
+        "question": "Which Country is Petra in?",
         "choices": ["China", "Jordan", "Peru", "Brazil" ,],
         "answer": "Jordan",
         "image" : "P.jpeg" },
@@ -91,7 +93,7 @@ question_dictionary = {
 
 
     11: {
-        "question": "Which Country is this Wonder in?",
+        "question": "Which Country is Machu Picchu in?",
         "choices": ["China", "Jordan", "Peru", "India" ,],
         "answer": "Peru",
         "image" : "MP.jpg" },
@@ -100,7 +102,7 @@ question_dictionary = {
 
 
     12: {
-        "question": "Which Country is this Wonder in?",
+        "question": "Which Country is the Colosseum in?",
         "choices": ["Italy", "Jordan", "Mexico", "Brazil" ,],
         "answer": "Italy",
         "image" : "C.jpg" },
@@ -109,21 +111,22 @@ question_dictionary = {
 
 
     13: {
-        "question": "Which Country is this Wonder in?",
+        "question": "Which Country is the Taj Mahal in?",
         "choices": ["China", "Italy", "India", "Brazil" ,],
         "answer": "India",
         "image" : "TM.jpeg" },
 
 }
 
-
+#controls the interface
 class Quiz:
+    #create the quiz screen and makes variables
     def __init__(self, parent, username):
         self.parent = parent
         self.username = username
         self.frame = Frame(parent, bg=bg_color)
         self.frame.pack(fill="both", expand=True)
-
+        #variables for the quiz
         self.current_index = 0
         self.score = 0
         self.selected_choice = tk.StringVar()
@@ -178,7 +181,7 @@ class Quiz:
             image_path = "Photos/" + current_q["image"]
             try:
                 opened_img = Image.open(image_path)
-                resized_img = opened_img.resize((400, 200))
+                resized_img = opened_img.resize((300, 200))
                 tk_img = ImageTk.PhotoImage(resized_img)
                 self.image_label.config(image=tk_img)
                 self.image_label.image = tk_img
@@ -186,9 +189,12 @@ class Quiz:
                 self.image_label.config(image="")
                 print(f"Warning: Could not load image {image_path}")
         else:
-            messagebox.showinfo("Quiz Finished",
-                                f"Great job {self.username}!\nYour final score is: {self.score}/{len(question_dictionary)}")
-            self.parent.destroy()
+            self.frame.destroy()
+            ResultsPage(self.parent, self.username, self.score)
+
+
+
+
 
     def check_and_next(self):
         if not self.selected_choice.get():
@@ -200,6 +206,33 @@ class Quiz:
             self.score += 1
         self.current_index += 1
         self.load_question()
+
+class ResultsPage:
+    def __init__(self, parent, username, score):
+        self.parent = parent
+
+        self.frame = Frame(parent, bg=bg_color)
+        self.frame.pack(fill="both", expand=True)
+
+        Label(self.frame, text="Quiz Finished", font=("Helvetica", 34, "bold"),
+            bg=bg_color).pack(pady=(80, 20))
+
+        Label(self.frame, text=f"Well done, {username}", font=("Helvetica", 18, "bold"),
+              bg=bg_color,
+            ).pack()
+
+        Label(self.frame, text=f"{score}/{len(question_dictionary)}", font=("Helvetica", 34, "bold"),
+              bg=bg_color,
+              fg="#333333").pack(pady=(40))
+
+        Button(
+            self.frame,
+        text="Exit",
+            font=("Helvetica", 18),
+            bg='#417a58',
+            fg="white",
+            command=parent.destroy).pack(pady=20)
+
 
 
 class Startingpage:
