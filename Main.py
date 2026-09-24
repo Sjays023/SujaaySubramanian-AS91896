@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import messagebox, Frame, Label, Entry, Button, Radiobutton, PhotoImage
 from PIL import Image, ImageTk
 
-from Testing_File_For_Code_Fr import ResultsPage
+
 
 # Colour theme for the quiz
 bg_color = "#fcf0ea"
