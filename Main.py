@@ -265,7 +265,7 @@ class Startingpage:
 
         self.entry = Entry(self.frame, font=("Arial", 14))
         self.entry.place(x=67, y=75)
-
+        # f9af8f
         #2 buttons to start the quiz and exit the quiz
         Button(self.frame, text="Start Quiz", font=("Arial", 25), bg="#f9af8f", command=self.start_quiz).place(x=277,
                                                                                                                y=580)
